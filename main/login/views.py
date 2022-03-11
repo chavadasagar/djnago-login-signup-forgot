@@ -39,8 +39,8 @@ def sendMail(request):
     otp = random.randint(1,10000)
 
 
-    gmail = 'sagarchavada70@gmail.com'
-    password = "sagar80@99135"
+    gmail = ''
+    password = ""
 
 
 
