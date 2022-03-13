@@ -46,13 +46,7 @@ def sendMail(request):
 
     gmail = ''
     password = ""
-<<<<<<< HEAD
-
-    request.session['email'] = email
-=======
->>>>>>> f52cb09a430c6e8ae2ca70be55a65ff3385e8658
-
-
+    
 
     def sendMail(to,sub,msg):
         print(f"email to {to} send with subject is:{sub} and Message {msg}")
