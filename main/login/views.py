@@ -46,8 +46,11 @@ def sendMail(request):
 
     gmail = ''
     password = ""
+<<<<<<< HEAD
 
     request.session['email'] = email
+=======
+>>>>>>> f52cb09a430c6e8ae2ca70be55a65ff3385e8658
 
 
 
