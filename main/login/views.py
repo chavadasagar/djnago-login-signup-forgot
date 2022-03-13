@@ -24,10 +24,18 @@ def home(request):
 def saveUser(request):
 
     name = request.POST.get('name')
-    email = request.POST.get('email')
+    temail = request.POST.get('email')
     password = request.POST.get('password')
 
-    u = user(name=name, email=email, password=password)
+    alluser = user.objects.all()
+
+    for u in alluser:
+        if u.email == temail:
+            return HttpResponse("This email is already found please try to login <a href='login'>login</a>")
+
+
+
+    u = user(name=name, email=temail, password=password)
     u.save()
 
     return redirect('login')
@@ -46,6 +54,9 @@ def sendMail(request):
 
     gmail = ''
     password = ""
+
+    request.session['email'] = email
+    print(request.session['email'])
     
 
     def sendMail(to,sub,msg):
@@ -82,6 +93,7 @@ def checkotp(request):
     this_otp = request.POST.get("otp")
 
     if int(this_otp) == otp:
+        print(otp)
         return redirect("getchangepassword")
     else:
         return HttpResponse("wrong password")
@@ -95,15 +107,18 @@ def changepassword(request):
     password1 = request.POST.get('password1')
     password2 = request.POST.get('password2')
 
-    this_email = request.session['email']
-    u = user.objects.get(email=this_email)
 
-    u.password = password2
+    if password1 != password2:
+        return HttpResponse("password does not match")
+    else:
+        this_email = request.session['email']
+        print(this_email)
+        u = user.objects.get(email=this_email)
 
-    u.save()
-
-    del request.session['email']
-
-    return redirect('login')
+        u.password = password2
+        u.save()
+        del u
+        del request.session['email']
+        return redirect('login')
 
 
