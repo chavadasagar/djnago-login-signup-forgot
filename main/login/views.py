@@ -16,6 +16,8 @@ def signup(request):
 
 
 def home(request):
+
+
     return render(request, 'home.html')
 
 
@@ -36,11 +38,16 @@ def forgot(request):
 def sendMail(request):
     email = request.POST.get('email')
 
-    otp = random.randint(1,10000)
+    global otp
+    otp  = random.randint(1,10000)
 
 
-    gmail = 'sagarchavada70@gmail.com'
-    password = "sagar80@99135"
+    # enter email and password and turn on less secure app
+
+    gmail = ''
+    password = ""
+
+    request.session['email'] = email
 
 
 
@@ -73,5 +80,33 @@ def isvaliduser(request):
         except Exception as e:
             return HttpResponse('wrong email or password')
     
+
+def checkotp(request):
+    this_otp = request.POST.get("otp")
+
+    if int(this_otp) == otp:
+        return redirect("getchangepassword")
+    else:
+        return HttpResponse("wrong password")
+
+
+def getchangepassword(request):
+    return render(request,'changepassword.html')
+
+    
+def changepassword(request):
+    password1 = request.POST.get('password1')
+    password2 = request.POST.get('password2')
+
+    this_email = request.session['email']
+    u = user.objects.get(email=this_email)
+
+    u.password = password2
+
+    u.save()
+
+    del request.session['email']
+
+    return redirect('login')
 
 

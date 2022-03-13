@@ -16,4 +16,7 @@ urlpatterns = [
     path('isvaliduser',views.isvaliduser,name='isvaliduser'),
     path('forgot',views.forgot,name='forgot'),
     path('sendMail',views.sendMail,name='sendMail'),
+    path("checkotp",views.checkotp,name='checkotp'),
+    path("getchangepassword",views.getchangepassword,name='getchangepassword'),
+    path("changepassword",views.changepassword,name='changepassword'),
 ]

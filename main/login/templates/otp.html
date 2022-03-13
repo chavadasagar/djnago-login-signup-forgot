@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>otp</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,11 +20,11 @@
             <h1 class="display-4">Forgate Password</h1>
 
             <br>
-            <form method="post" action="">
+            <form method="post" action="checkotp">
 
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1"  aria-describedby="emailHelp"
+                    <input type="number" name="otp" class="form-control" id="exampleInputEmail1"  aria-describedby="emailHelp"
                         placeholder="Enter Otp">
                 </div>
 
